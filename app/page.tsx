@@ -1,5 +1,10 @@
+import Form from '@/app/form';
+
 export default function Home() {
   return (
-    <p>Hello world.</p>
+    <div>
+      <Form />
+    </div>
+    
   );
 }
