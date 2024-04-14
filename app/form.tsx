@@ -1,6 +1,8 @@
+import { retrieveInput } from '@/app/actions';
+
 export default function Form() {
     return (
-        <form>
+        <form action={retrieveInput}>
             <div className='mb-4'>
                 <label htmlFor="weight">Enter weight in pounds: </label>
                 <input type="number" id="weight" name="weight"></input>
@@ -16,7 +18,7 @@ export default function Form() {
 
             <div className='mb-4'>
                 <label htmlFor="experience-level">Enter experience level: </label>
-                <select id='experience-level' name='experienceLevel' defaultValue=''>
+                <select id='experience-level' name='experience-level' defaultValue=''>
                     <option value='' disabled>
                         Select your experience level
                     </option>
@@ -31,6 +33,9 @@ export default function Form() {
                     </option>
                 </select>
             </div>
+
+            <button type="submit">Submit Data</button>
         </form>
     );
 }
+
