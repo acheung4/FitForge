@@ -21,6 +21,7 @@ export async function retrieveInput(formData: FormData) {
     const heightInInches = (feet * 12) + inches;
 
     var dataValid = true;
+    var result = null
 
     //checking for valid data
     if (weight > 1000 || weight < 50) {
@@ -52,7 +53,9 @@ export async function retrieveInput(formData: FormData) {
                 lbs = lbs * 1.5;
         }
 
-        console.log(lbs.toFixed(2));
+        result = lbs.toFixed(2);
+        console.log(result);
     }
-
+    
+    return result;
 }
