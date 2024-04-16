@@ -52,7 +52,7 @@ export async function retrieveInput(formData: FormData) {
             case 'expert':
                 lbs = lbs * 1.5;
         }
-
+        
         result = lbs.toFixed(2);
         console.log(result);
     }
