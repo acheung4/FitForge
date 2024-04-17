@@ -1,8 +1,23 @@
+"use client";
+
 import { retrieveInput } from '@/app/actions';
+import { useFormState, useFormStatus } from 'react-dom';
+
+const initialState = {
+    message: "",
+};
 
 export default function Form() {
+    const [state, formAction] = useFormState(retrieveInput, initialState);
+
+    function SubmitButton() {
+        const { pending } = useFormStatus();
+
+        return <button type="submit" aria-disabled={pending}>Generate workout plan</button>;
+    }
+
     return (
-        <form action={retrieveInput}>
+        <form action={formAction}>
             <div className='mb-4'>
                 <label htmlFor="weight">Enter weight in pounds: </label>
                 <input type="number" id="weight" name="weight"></input>
@@ -34,7 +49,11 @@ export default function Form() {
                 </select>
             </div>
 
-            <button type="submit">Submit Data</button>
+            <SubmitButton />
+
+            <p role="status">
+                {state?.message}
+            </p>
         </form>
     );
 }

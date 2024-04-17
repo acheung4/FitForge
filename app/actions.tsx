@@ -1,17 +1,74 @@
 'use server';
 
 import { z } from 'zod';
+import { db } from '@/database';
+import { revalidatePath } from 'next/cache';
 
-const FormSchema = z.object( {
-    weight: z.coerce.number(),
-    feet: z.coerce.number(),
-    inches: z.coerce.number(),
-    level: z.string(),
-});
+export async function createWorkout(prevState: any, formData: FormData) {
 
-export async function retrieveInput(formData: FormData) {
+    const schema = z.object({
+        title: z.string().min(1),
+        content: z.string().min(1),
+    });
+
+    const data = schema.parse({
+        title: formData.get('title'),
+        content: formData.get('content'),
+    });
+
+    try {
+        const workout = await db.workout.create({
+            data: {
+                title: data.title,
+                content: data.content,
+            },
+        });
+        console.log(workout);
+        revalidatePath('/');
+        return { message: `Added workout ${workout}`};
+    }
+    catch (e) {
+        return { message: 'Failed to add workout'};
+    }
+}
+
+export async function retrieveInput(prevState : { message : string}, formData: FormData) {
     
-    const { weight, feet, inches, level } = FormSchema.parse({
+    const schema = z.object({
+        title: z.string().min(1),
+        content: z.string().min(1),
+    });
+
+    try {
+        const data = schema.parse({
+            title: '',
+            content: 'formData.get()',
+        });
+
+        const workout = await db.workout.create({
+            data: {
+                title: '',
+                content: 'data.content',
+            },
+        });
+        revalidatePath('/');
+        return { message: `Added workout ${workout.title}`};
+    }
+    catch (e) {
+        return { message: 'Failed to add workout'};
+    }
+}
+
+/*export async function retrieveInput(formData: FormData) {
+
+    const schema = z.object({
+        weight: z.coerce.number(),
+        feet: z.coerce.number(),
+        inches: z.coerce.number(),
+        level: z.string(),
+    });
+
+    const { weight, feet, inches, level } = schema.parse({
         weight: formData.get('weight'),
         feet: formData.get('height-ft'),
         inches: formData.get('height-in'),
@@ -38,7 +95,7 @@ export async function retrieveInput(formData: FormData) {
 
     if (dataValid) {
         //calculate the amount of lbs that person should lift, using weight, height, and experience lvl as multipliers
-        var lbs = 20;
+        let lbs = 20;
 
         lbs = lbs * (weight / 150) * (heightInInches / 75);
 
@@ -52,10 +109,10 @@ export async function retrieveInput(formData: FormData) {
             case 'expert':
                 lbs = lbs * 1.5;
         }
-        
+
         result = lbs.toFixed(2);
-        console.log(result);
     }
-    
+
     return result;
 }
+*/
