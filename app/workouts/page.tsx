@@ -13,7 +13,11 @@ export default async function ListofWorkouts() {
                     key={workout.id}
                     id={workout.id}
                     title={workout.title}
-                    content={workout.content}
+                    monday={workout.monday}
+                    tuesday={workout.tuesday}
+                    wednesday={workout.wednesday}
+                    thursday={workout.thursday}
+                    friday={workout.friday}
                 />
             )
         })

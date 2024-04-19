@@ -12,3 +12,8 @@ export async function getWorkoutsInCommunity(community : string) {
     )
     return workouts;
 }
+
+export async function getCommunities() {
+    const communities = await db.community.findMany();
+    return communities;
+}

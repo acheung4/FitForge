@@ -8,20 +8,20 @@ export async function createWorkout(prevState: any, formData: FormData) {
 
     const schema = z.object({
         title: z.string().min(1),
-        community: z.string(),
         weight: z.coerce.number(),
         feet: z.coerce.number(),
         inches: z.coerce.number(),
         level: z.string(),
+        community: z.coerce.number(),
     });
 
     const data = schema.parse({
         title: formData.get('title'),
-        community: formData.get('community'),
         weight: formData.get('weight'),
         feet: formData.get('height-ft'),
         inches: formData.get('height-in'),
         level: formData.get('experience-level'),
+        community: formData.get('community'),
     });
 
     const heightInInches = (data.feet * 12) + data.inches;
@@ -42,22 +42,43 @@ export async function createWorkout(prevState: any, formData: FormData) {
     const { monday, tuesday, wednesday, thursday, friday } = generateWorkout(index);
 
     try {
-        // const workout = await db.workout.create({
-        //     data: {
-        //         title: data.title,
-        //         content: data.content,
-        //     },
-        // });
-        // console.log(workout);
+        const workout = await db.workout.create({
+            data: {
+                title: data.title,
+                monday: monday,
+                tuesday: tuesday,
+                wednesday: wednesday,
+                thursday: thursday,
+                friday: friday,
+            },
+        });
+        
+        if (data.community != 0) {
+            const linkCommunity = await db.community.update({
+                where: {
+                    id: data.community
+                },
+                data: {
+                    workouts: {
+                        connect: {
+                            id: workout.id
+                        },
+                    },
+                },
+            });
+            console.log(linkCommunity);
+        }
+
+        console.log(workout);
         revalidatePath('/');
-        //return { message: `Added workout ${workout}`};
+        return { message: 'Added workout successfully' };
     }
     catch (e) {
-        return { message: 'Failed to add workout'};
+        return { message: 'Failed to add workout' };
     }
 }
 
-function generateWorkout(index : number) {
+function generateWorkout(index: number) {
     let monday, tuesday, wednesday, thursday, friday;
 
     if (index < 5) {
@@ -89,34 +110,7 @@ function generateWorkout(index : number) {
         friday = 'Sprint Intervals, 20 minutes';
     }
 
-    return { monday, tuesday, wednesday, thursday, friday};
-}
-
-export async function retrieveInput(prevState : { message : string}, formData: FormData) {
-    
-    const schema = z.object({
-        title: z.string().min(1),
-        content: z.string().min(1),
-    });
-
-    try {
-        const data = schema.parse({
-            title: '',
-            content: 'formData.get()',
-        });
-
-        const workout = await db.workout.create({
-            data: {
-                title: '',
-                content: 'data.content',
-            },
-        });
-        revalidatePath('/');
-        return { message: `Added workout ${workout.title}`};
-    }
-    catch (e) {
-        return { message: 'Failed to add workout'};
-    }
+    return { monday, tuesday, wednesday, thursday, friday };
 }
 
 /*export async function retrieveInput(formData: FormData) {

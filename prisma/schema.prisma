@@ -13,20 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//npx prisma db push
+//npx primsa studio
+
 model Workout {
   id            Int           @id @default(autoincrement())
   createdAt     DateTime      @default(now())
   title         String        @db.VarChar(255)
-  community     String?
   monday        String   
   tuesday       String    
   wednesday     String    
   thursday      String    
-  friday        String             
+  friday        String   
+  community     Community?    @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId   Int?
+            
 }
 
 model Community {
   id            Int           @id @default(autoincrement())
   createdAt     DateTime      @default(now())
   name          String        @db.VarChar(255)
+  workouts      Workout[]
 }

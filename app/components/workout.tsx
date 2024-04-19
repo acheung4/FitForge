@@ -1,13 +1,21 @@
 export default function Workout(
-    {id, title, content} : {
-        id: string,
+    {id, title, monday, tuesday, wednesday, thursday, friday} : {
+        id: number,
         title: string,
-        content: string,},
+        monday: string,
+        tuesday: string,
+        wednesday: string,
+        thursday: string,
+        friday: string,},
 ) {
     return (
         <div>
-            <h2>{title}: {content}</h2>
-            <h2>{content}</h2>
+            <h2>{title}: {id}</h2>
+            <h3>{monday}</h3>
+            <h3>{tuesday}</h3>
+            <h3>{wednesday}</h3>
+            <h3>{thursday}</h3>
+            <h3>{friday}</h3>
         </div>
     );
 }
