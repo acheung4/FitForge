@@ -1,5 +1,18 @@
-export default function CommunityBoard() {
-    return <p>Community Page</p>;
+import { getCommunities } from "@/database/queries";
+
+export default async function CommunityBoard() {
+    
+    const communities = await getCommunities();
+    
+    return (
+        communities.map((community) => {
+            return (
+                <div>
+                    <h2>{community.name}</h2>
+                </div>
+            )
+        })
+    );
 }
 
 

@@ -8,7 +8,7 @@ export default function NavBar() {
                 <Link href={'/community'}>Community Board</Link>
                 <Link href={'/workouts'}>List of Workouts</Link>
                 <Link href={'/create-workout'}>
-                Create new workout plan
+                    Create new workout plan
                 </Link>
             </div>
         </div>
