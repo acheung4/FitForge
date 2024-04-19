@@ -13,9 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// This block of code defines a Workout table in database
 model Workout {
-  id        String   @id @default(cuid())
-  title     String   @db.VarChar(255)       // will generate VARCHAR
-  content   String                          // will generate TEXT
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  title         String        @db.VarChar(255)
+  community     String?
+  monday        String   
+  tuesday       String    
+  wednesday     String    
+  thursday      String    
+  friday        String             
+}
+
+model Community {
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  name          String        @db.VarChar(255)
 }

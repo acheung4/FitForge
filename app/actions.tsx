@@ -8,28 +8,88 @@ export async function createWorkout(prevState: any, formData: FormData) {
 
     const schema = z.object({
         title: z.string().min(1),
-        content: z.string().min(1),
+        community: z.string(),
+        weight: z.coerce.number(),
+        feet: z.coerce.number(),
+        inches: z.coerce.number(),
+        level: z.string(),
     });
 
     const data = schema.parse({
         title: formData.get('title'),
-        content: formData.get('content'),
+        community: formData.get('community'),
+        weight: formData.get('weight'),
+        feet: formData.get('height-ft'),
+        inches: formData.get('height-in'),
+        level: formData.get('experience-level'),
     });
 
+    const heightInInches = (data.feet * 12) + data.inches;
+
+    let index = 20 * (data.weight / 150) * (heightInInches / 75);
+
+    switch (data.level) {
+        case 'novice':
+            index = index * 1;
+            break;
+        case 'intermediate':
+            index = index * 1.25;
+            break;
+        case 'expert':
+            index = index * 1.5;
+    }
+
+    const { monday, tuesday, wednesday, thursday, friday } = generateWorkout(index);
+
     try {
-        const workout = await db.workout.create({
-            data: {
-                title: data.title,
-                content: data.content,
-            },
-        });
-        console.log(workout);
+        // const workout = await db.workout.create({
+        //     data: {
+        //         title: data.title,
+        //         content: data.content,
+        //     },
+        // });
+        // console.log(workout);
         revalidatePath('/');
-        return { message: `Added workout ${workout}`};
+        //return { message: `Added workout ${workout}`};
     }
     catch (e) {
         return { message: 'Failed to add workout'};
     }
+}
+
+function generateWorkout(index : number) {
+    let monday, tuesday, wednesday, thursday, friday;
+
+    if (index < 5) {
+        monday = 'submit text here';
+        tuesday = 's';
+        wednesday = '';
+        thursday = '';
+        friday = '';
+    }
+    else if (index < 10) {
+        monday = 'submit text here';
+        tuesday = 's';
+        wednesday = '';
+        thursday = '';
+        friday = '';
+    }
+    else if (index < 15) {
+        monday = 'submit text here';
+        tuesday = 's';
+        wednesday = '';
+        thursday = '';
+        friday = '';
+    }
+    else {
+        monday = 'submit text here';
+        tuesday = 's';
+        wednesday = '';
+        thursday = '';
+        friday = '';
+    }
+
+    return { monday, tuesday, wednesday, thursday, friday};
 }
 
 export async function retrieveInput(prevState : { message : string}, formData: FormData) {
