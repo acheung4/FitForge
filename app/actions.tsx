@@ -66,10 +66,8 @@ export async function createWorkout(prevState: any, formData: FormData) {
                     },
                 },
             });
-            console.log(linkCommunity);
         }
 
-        console.log(workout);
         revalidatePath('/');
         return { message: 'Added workout successfully' };
     }
