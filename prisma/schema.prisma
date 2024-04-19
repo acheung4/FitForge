@@ -13,9 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// This block of code defines a Workout table in database
+//npx prisma db push
+//npx primsa studio
+
 model Workout {
-  id        String   @id @default(cuid())
-  title     String   @db.VarChar(255)       // will generate VARCHAR
-  content   String                          // will generate TEXT
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  title         String        @db.VarChar(255)
+  monday        String   
+  tuesday       String    
+  wednesday     String    
+  thursday      String    
+  friday        String   
+  community     Community?    @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId   Int?
+            
+}
+
+model Community {
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  name          String        @db.VarChar(255)
+  workouts      Workout[]
 }

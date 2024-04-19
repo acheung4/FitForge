@@ -4,14 +4,15 @@ import NavBar from '@/app/components/navbar';
 
 export default function Home() {
   return (
-    <div className="self-stretch px-[130px] flex justify-between items-center pb-[50px]">
-      <h1></h1>
-      <button className="curson-pointer rounded-lg px-[10px] py-[8px] h-[40px] w-[93px]">
-        <div className='bg-blue-500 border relative font-medium font-poppins text-black my-[300px]'>
+    <div className="">
+      <img src="/public/FitForge-logo.svg" alt="Logo" className='top-0' style={{ height: '360px', width: '390px', margin: '150px auto' }}/>
+      <button className="font-bold flex justify-center items-center" style={{ height: '220px', width: '390px', margin: '190px auto' }}>
+        <div className="bg-blue-500 border rounded-full text-center text-6x1 h-full w-full flex items-center justify-center">
           Get Started
         </div>
       </button>
-      <NavBar />
+
+      {/* <NavBar /> */}
     </div>
   );
 }

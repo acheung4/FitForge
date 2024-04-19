@@ -5,10 +5,26 @@ export async function getWorkouts() {
     return workouts;
 }
 
-//get workouts only in specific community
-export async function getWorkoutsInCommunity(community : string) {
-    const workouts = await db.workout.findMany(
-        //where communityFieldInDB = community
-    )
-    return workouts;
+export async function getSpecificWorkout(workoutID: number) {
+    const workout = await db.workout.findUnique({
+        where: {
+            id: workoutID,
+        },
+    });
+    return workout;
+
+}
+
+export async function getWorkoutsInCommunity(communityID: number) {
+    const workoutsInCommunity = await db.workout.findMany({
+        where: {
+            communityId: communityID,
+        },
+    });
+    return workoutsInCommunity;
+}
+
+export async function getCommunities() {
+    const communities = await db.community.findMany();
+    return communities;
 }

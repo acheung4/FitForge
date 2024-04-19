@@ -1,16 +1,25 @@
-export default function SpecificWorkout(
-    { params } : {
-        params: { id: string }},
-    {id, title, content} : {
-        id: string,
-        title: string,
-        content: string,},
+import { getSpecificWorkout } from "@/database/queries";
+
+export default async function SpecificWorkout(
+    { params }: {
+        params: { id: string }
+    },
 ) {
+    const workout = await getSpecificWorkout(parseInt(params.id));
+
     return (
         <div>
-            <main>ID: {params.id} </main>
-            <h2>{title}: {content}</h2>
-            <h2>{content}</h2>
+            {
+                workout ? (
+                    <div>
+                        <h2>{workout.title}</h2>
+                        <h3>{workout.monday}</h3>
+                        <h3>{workout.tuesday}</h3>
+                        <h3>{workout.wednesday}</h3>
+                        <h3>{workout.thursday}</h3>
+                        <h3>{workout.friday}</h3>
+                    </div>) : null
+            }
         </div>
     );
 }
