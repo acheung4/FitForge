@@ -61,32 +61,32 @@ function generateWorkout(index : number) {
     let monday, tuesday, wednesday, thursday, friday;
 
     if (index < 5) {
-        monday = 'submit text here';
-        tuesday = 's';
-        wednesday = '';
-        thursday = '';
-        friday = '';
+        monday = 'Bodyweight Squats, 3 sets of 12 reps';
+        tuesday = 'Push-ups, 3 sets of 15 reps';
+        wednesday = 'Bodyweight Pull-ups, 3 sets of 10 reps';
+        thursday = 'Plank, 3 sets of 30 seconds';
+        friday = 'Jogging, 20 minutes';
     }
     else if (index < 10) {
-        monday = 'submit text here';
-        tuesday = 's';
-        wednesday = '';
-        thursday = '';
-        friday = '';
+        monday = 'Deadlift, 4 sets of 10 reps';
+        tuesday = 'Bench Press, 4 sets of 8 reps';
+        wednesday = 'Bent Over Row, 4 sets of 10 reps';
+        thursday = 'Leg Press, 4 sets of 12 reps';
+        friday = 'HIIT Cardio, 15 minutes';
     }
     else if (index < 15) {
-        monday = 'submit text here';
-        tuesday = 's';
-        wednesday = '';
-        thursday = '';
-        friday = '';
+        monday = 'Clean and Jerk, 5 sets of 5 reps';
+        tuesday = 'Snatch, 5 sets of 5 reps';
+        wednesday = 'Front Squat, 5 sets of 5 reps';
+        thursday = 'Muscle Ups, 5 sets of 5 reps';
+        friday = 'Long Distance Running, 30 minutes';
     }
     else {
-        monday = 'submit text here';
-        tuesday = 's';
-        wednesday = '';
-        thursday = '';
-        friday = '';
+        monday = 'Squat, Heavy, 5 sets of 3 reps';
+        tuesday = 'Bench Press, Heavy, 5 sets of 3 reps';
+        wednesday = 'Deadlift, Heavy, 5 sets of 3 reps';
+        thursday = 'Overhead Press, Heavy, 5 sets of 3 reps';
+        friday = 'Sprint Intervals, 20 minutes';
     }
 
     return { monday, tuesday, wednesday, thursday, friday};
