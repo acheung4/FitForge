@@ -45,15 +45,11 @@ export default function Form({
             <div className='flex flex-wrap -mx-3 mb-6'>
                 <div className='w-full md:w-1/2 px-3 mb-6 md:mb:-0'>
                 <label htmlFor="height" className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Enter height: </label>
-                    <div className='w-full md:w-1/2 px-3'>
-                    <span>Feet: </span>
-                    <input type="number" id="height-ft" name="height-ft" required className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'>                        
-                    </input>
-                    <div className='w-full md:w-1/2 px-3'>
-                        <span>Inches: </span>
-                        <input type="number" id="height-in" name="height-in" required className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'>                            
+                    <div className='flex w-full md:w-1/2 px-3'>
+                        <input type="number" id="height-ft" name="height-ft" placeholder="Feet" required className='appearance-none mr-5 block w-52 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'>                        
                         </input>
-                    </div>
+                        <input type="number" id="height-in" name="height-in" placeholder="Inches" required className='appearance-none block w-52 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'>                            
+                        </input>
                     </div>
                     <br></br>
                     
