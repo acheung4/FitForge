@@ -6,7 +6,7 @@ export default async function CommunityDropDown() {
     return (
         <div className='mb-4'>
             <label htmlFor="community">Would you like to share to any community? </label>
-            <select id='community' name='community' defaultValue=''>
+            <select id='community' name='community' defaultValue='' required>
                 <option value='' disabled>
                     Choose community. Select none if N/A
                 </option>
