@@ -12,7 +12,6 @@ export async function getSpecificWorkout(workoutID: number) {
         },
     });
     return workout;
-
 }
 
 export async function getWorkoutsInCommunity(communityID: number) {
@@ -27,4 +26,13 @@ export async function getWorkoutsInCommunity(communityID: number) {
 export async function getCommunities() {
     const communities = await db.community.findMany();
     return communities;
+}
+
+export async function getSpecificCommunity(communityID: number) {
+    const workout = await db.community.findUnique({
+        where: {
+            id: communityID,
+        },
+    });
+    return workout;
 }

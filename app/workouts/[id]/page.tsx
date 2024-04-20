@@ -1,4 +1,3 @@
-import WorkoutDetails from "@/app/components/workout-card";
 import { getSpecificWorkout } from "@/database/queries";
 
 export default async function SpecificWorkout(

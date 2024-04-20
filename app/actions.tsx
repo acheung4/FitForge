@@ -3,9 +3,9 @@
 import { z } from 'zod';
 import { db } from '@/database';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function createWorkout(prevState: any, formData: FormData) {
-
     const schema = z.object({
         title: z.string().min(1),
         weight: z.coerce.number(),
@@ -67,9 +67,8 @@ export async function createWorkout(prevState: any, formData: FormData) {
                 },
             });
         }
-
-        revalidatePath('/');
-        return { message: 'Added workout successfully' };
+        revalidatePath('/', 'layout');
+        //redirect(`/workouts/${workout.id}`);
     }
     catch (e) {
         return { message: 'Failed to add workout' };
