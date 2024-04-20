@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <div className="flex justify-end w-full mt-px">
+        <div className="flex justify-end w-full mt-30">
             <div className="flex space-x-4">
                 <Link href={'/'}>Home</Link>
                 <Link href={'/community'}>Community Board</Link>
