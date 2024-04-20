@@ -6,7 +6,7 @@ export default function Page() {
     return (
         <Form>
             <CommunityDropDown />
-            <NavBar />
+            {/*<NavBar />*/}
         </Form>
     );
 }

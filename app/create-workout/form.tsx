@@ -21,7 +21,7 @@ export default function Form({
     }
 
     return (
-        <form action={formAction}>
+        <form action={formAction} className='mt-60'>
             <div className='mb-4'>
                 <label htmlFor="title">Enter workout title: </label>
                 <input type="text" id="title" name="title" required></input>
