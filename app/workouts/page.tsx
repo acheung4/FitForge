@@ -1,4 +1,4 @@
-import Workout from '@/app/components/workout';
+import WorkoutDetails from '@/app/components/workout-card';
 import { getWorkouts } from '@/database/queries';
 
 
@@ -8,7 +8,7 @@ export default async function ListofWorkouts() {
     return (
         workouts.map((workout) => {
             return (
-                <Workout
+                <WorkoutDetails
                     key={workout.id}
                     id={workout.id}
                     title={workout.title}

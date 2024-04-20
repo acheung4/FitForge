@@ -1,4 +1,4 @@
-export default function Workout(
+export default function WorkoutDetails(
     {id, title, monday, tuesday, wednesday, thursday, friday} : {
         id: number,
         title: string,

@@ -1,4 +1,4 @@
-import Workout from "@/app/components/workout";
+import WorkoutDetails from "@/app/components/workout-card";
 import { getWorkoutsInCommunity } from "@/database/queries";
 
 export default async function Community( { params } : {
@@ -9,7 +9,7 @@ export default async function Community( { params } : {
     return (
         workouts.map((workout) => {
             return (
-                <Workout
+                <WorkoutDetails
                     key={workout.id}
                     id={workout.id}
                     title={workout.title}
