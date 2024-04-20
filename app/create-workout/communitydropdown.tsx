@@ -5,13 +5,13 @@ export default async function CommunityDropDown() {
 
     return (
         <div className='mb-4'>
-            <label htmlFor="community">Would you like to share to any community? </label>
+            <label htmlFor="community">ENTER COMMUNITY: </label>
             <select id='community' name='community' defaultValue='' required>
                 <option value='' disabled>
-                    Choose community. Select none if N/A
+                    Select none if do not want to share
                 </option>
                 <option key={0} value={0}>
-                    None
+                    none
                 </option>
                 {communities.map((community) => {
                     return <option key={community.id} value={community.id}>{community.name}</option>
