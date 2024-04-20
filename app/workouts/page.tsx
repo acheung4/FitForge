@@ -7,7 +7,7 @@ export default async function AllWorkouts() {
 
     return (
         workouts ?
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center mb-8">
                 <p className="text-4xl font-bold mb-8 mt-8">
                     All Workouts
                 </p>

@@ -1,49 +1,50 @@
 'use server';
 
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 import { db } from '@/database';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function createWorkout(prevState: any, formData: FormData) {
+    
+    let workoutID;
+
     const schema = z.object({
         title: z.string().min(1),
-        weight: z.coerce.number(),
-        feet: z.coerce.number(),
-        inches: z.coerce.number(),
+        weight: z.coerce.number().gte(50).lte(1000),
+        feet: z.coerce.number().gte(3).lte(8),
+        inches: z.coerce.number().gte(0).lt(12),
         level: z.string(),
         community: z.coerce.number(),
     });
 
-    const data = schema.parse({
-        title: formData.get('title'),
-        weight: formData.get('weight'),
-        feet: formData.get('height-ft'),
-        inches: formData.get('height-in'),
-        level: formData.get('experience-level'),
-        community: formData.get('community'),
-    });
-
-    const heightInInches = (data.feet * 12) + data.inches;
-
-    let index = 20 * (data.weight / 150) * (heightInInches / 75);
-
-    switch (data.level) {
-        case 'novice':
-            index = index * 1;
-            break;
-        case 'intermediate':
-            index = index * 1.25;
-            break;
-        case 'expert':
-            index = index * 1.5;
-    }
-
-    const { monday, tuesday, wednesday, thursday, friday } = generateWorkout(index);
-
-    let workoutID;
-
     try {
+        const data = schema.parse({
+            title: formData.get('title'),
+            weight: formData.get('weight'),
+            feet: formData.get('height-ft'),
+            inches: formData.get('height-in'),
+            level: formData.get('experience-level'),
+            community: formData.get('community'),
+        });
+
+        const heightInInches = (data.feet * 12) + data.inches;
+
+        let index = 20 * (data.weight / 150) * (heightInInches / 75);
+
+        switch (data.level) {
+            case 'novice':
+                index = index * 1;
+                break;
+            case 'intermediate':
+                index = index * 1.25;
+                break;
+            case 'expert':
+                index = index * 1.5;
+        }
+
+        const { monday, tuesday, wednesday, thursday, friday } = generateWorkout(index);
+
         const workout = await db.workout.create({
             data: {
                 title: data.title,
@@ -71,9 +72,20 @@ export async function createWorkout(prevState: any, formData: FormData) {
         }
         revalidatePath('/', 'layout');
         workoutID = workout.id;
+        
     }
     catch (e) {
-        return { message: 'Failed to add workout' };
+        if (e instanceof ZodError) {
+            let errorMessage = '';
+            e.errors.forEach((error) => {
+                errorMessage = errorMessage + error.path[0].toString().toUpperCase() + ": " + error.message + ". ";
+            });
+            return { message: errorMessage };
+        }
+        else {
+            return { message: 'Failed to add workout' };
+        }
+        
     }
     
     redirect(`/workouts/${workoutID}`);
@@ -113,61 +125,3 @@ function generateWorkout(index: number) {
 
     return { monday, tuesday, wednesday, thursday, friday };
 }
-
-/*export async function retrieveInput(formData: FormData) {
-
-    const schema = z.object({
-        weight: z.coerce.number(),
-        feet: z.coerce.number(),
-        inches: z.coerce.number(),
-        level: z.string(),
-    });
-
-    const { weight, feet, inches, level } = schema.parse({
-        weight: formData.get('weight'),
-        feet: formData.get('height-ft'),
-        inches: formData.get('height-in'),
-        level: formData.get('experience-level'),
-    });
-
-    const heightInInches = (feet * 12) + inches;
-
-    var dataValid = true;
-    var result = null
-
-    //checking for valid data
-    if (weight > 1000 || weight < 50) {
-        console.log('Weight falls outside expected range.');
-    }
-    if (heightInInches < 36 || heightInInches > 108) {
-        console.log('Height falls outside expected range.');
-        dataValid = false;
-    }
-    if (level == '') {
-        console.log('Experience level not selected.');
-        dataValid = false;
-    }
-
-    if (dataValid) {
-        //calculate the amount of lbs that person should lift, using weight, height, and experience lvl as multipliers
-        let lbs = 20;
-
-        lbs = lbs * (weight / 150) * (heightInInches / 75);
-
-        switch (level) {
-            case 'novice':
-                lbs = lbs * 1;
-                break;
-            case 'intermediate':
-                lbs = lbs * 1.25;
-                break;
-            case 'expert':
-                lbs = lbs * 1.5;
-        }
-
-        result = lbs.toFixed(2);
-    }
-
-    return result;
-}
-*/
