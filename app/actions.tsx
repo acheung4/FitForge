@@ -41,6 +41,8 @@ export async function createWorkout(prevState: any, formData: FormData) {
 
     const { monday, tuesday, wednesday, thursday, friday } = generateWorkout(index);
 
+    let workoutID;
+
     try {
         const workout = await db.workout.create({
             data: {
@@ -68,11 +70,13 @@ export async function createWorkout(prevState: any, formData: FormData) {
             });
         }
         revalidatePath('/', 'layout');
-        //redirect(`/workouts/${workout.id}`);
+        workoutID = workout.id;
     }
     catch (e) {
         return { message: 'Failed to add workout' };
     }
+    
+    redirect(`/workouts/${workoutID}`);
 }
 
 function generateWorkout(index: number) {

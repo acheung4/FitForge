@@ -14,7 +14,7 @@ export default async function AllWorkouts() {
                 {
                     (workouts.map((workout) => {
                         return (
-                            <Link href={`/workouts/${workout.id}`} className="w-1/2 border border-gray-400 hover:bg-blue-500 bg-white rounded p-4 leading-normal">
+                            <Link key={workout.id} href={`/workouts/${workout.id}`} className="w-1/2 border border-gray-400 hover:bg-blue-500 bg-white rounded p-4 leading-normal">
                                 <p className="text-gray-900 font-bold text-xl mb-2">{workout.title}</p>
                                 <p className="text-gray-700">{workout.createdAt.toLocaleString()}</p>
                             </Link>
