@@ -126,6 +126,32 @@ function generateWorkout(index: number) {
     return { monday, tuesday, wednesday, thursday, friday };
 }
 
+export async function createCommunity(prevState: any, formData: FormData) {
+
+    const schema = z.object({
+        name: z.string().min(1),
+    });
+
+    try {
+        const data = schema.parse({
+            name: formData.get('name'),
+        });
+
+        const workout = await db.community.create({
+            data: {
+                name: data.name,
+            },
+        });
+
+        revalidatePath('/community');
+    }
+    catch (e) {
+        return { message: 'Failed to add community' };
+    }
+    
+    redirect('/community');
+}
+
 // export async function testIndex(prevState: any, formData: FormData) {
 
 //     const schema = z.object({
