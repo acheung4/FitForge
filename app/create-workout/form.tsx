@@ -17,7 +17,7 @@ export default function Form({
     function SubmitButton() {
         const { pending } = useFormStatus();
 
-        return <button type="submit" aria-disabled={pending}>GENERATE WORKOUT PLAN</button>;
+        return <button type="submit" className='border rounded p-2 bg-blue-700 text-white font-bold' aria-disabled={pending}>GENERATE PLAN</button>;
     }
 
     return (
