@@ -1,36 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Instructions To Execute Prototype: 
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+After cloning the GitHub repository, run npm install in the terminal to download all the required dependencies for the prototype to run. To run this command requires that Node.js is installed. To get the database up and running, installation of PostgreSQL is required. After installing PostgreSQL, search for psql in the search bar. Launch the psql command line, and enter through the prompts until it gets to the password prompt (where you then enter the password you created during installation). Type in command CREATE DATABASE fitforgedb to create a new database for the application. Then, go to the local repository and follow the commented instructions in the .env.example file to link the repo with the database. Then execute the command npx prisma db push in order to initialize the database tables; the database schema is already defined in the code itself. Run npx prisma studio in order to get an interactive user interface to modify the contents of the database. Run npm run dev to get the website up and running. 
