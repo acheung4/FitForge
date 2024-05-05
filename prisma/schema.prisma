@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Generate the Prisma Client in JavaScript
+generator client {
+  provider = "prisma-client-js"
+}
+
+// This block of code defines the database connection. The database is a PostgreSQL database. 
+// The database connection URL will be read from an environment variable named `DATABASE_URL`.
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//npx prisma db push
+//npx prisma studio
+
+model Workout {
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  title         String        @db.VarChar(255)
+  monday        String   
+  tuesday       String    
+  wednesday     String    
+  thursday      String    
+  friday        String   
+  community     Community?    @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId   Int?
+            
+}
+
+model Community {
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  name          String        @db.VarChar(255)
+  workouts      Workout[]
+}
