@@ -14,7 +14,7 @@ datasource db {
 }
 
 //npx prisma db push
-//npx primsa studio
+//npx prisma studio
 
 model Workout {
   id            Int           @id @default(autoincrement())

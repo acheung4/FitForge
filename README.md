@@ -1,3 +1,12 @@
-Instructions To Execute Prototype: 
+# FitForge
 
-After cloning the GitHub repository, run npm install in the terminal to download all the required dependencies for the prototype to run. To run this command requires that Node.js is installed. To get the database up and running, installation of PostgreSQL is required. After installing PostgreSQL, search for psql in the search bar. Launch the psql command line, and enter through the prompts until it gets to the password prompt (where you then enter the password you created during installation). Type in command CREATE DATABASE fitforgedb to create a new database for the application. Then, go to the local repository and follow the commented instructions in the .env.example file to link the repo with the database. Then execute the command npx prisma db push in order to initialize the database tables; the database schema is already defined in the code itself. Run npx prisma studio in order to get an interactive user interface to modify the contents of the database. Run npm run dev to get the website up and running. 
+A workout planner that helps people develop customized workout routines based on their weight, height, and experience level.
+
+Running FitForge Locally:
+
+1. Clone the GitHub repository and run *npm install* with Node.js installed.
+2. Install PostgreSQL. After installation, search for psql in the operating system. Launch the psql command line, and enter through the prompts until it gets to the password prompt (where you then enter the password you created during installation). Execute command *CREATE DATABASE* fitforgedb to create a new database for the application.
+3. To link the repository with the newly created database, go to the local repository and follow the commented instructions in the .env.example file
+4. Execute *npx prisma db push* to initialize the database tables. The database schema is already defined in the code itself.
+5. Run *npx prisma studio* in order to get an interactive user interface for modifying the contents of the database.
+6. Run *npm run dev* to start the development server.
